@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Quieres ser mi San Valentín?</title>
+    <style>
+body {
+    animation: fadeApp 1.5s ease-in-out;
+}
+
+@keyframes fadeApp {
+    from { opacity: 0; transform: scale(1.05); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+        /* Import a romantic font */
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
+
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Dancing Script', cursive;
+    background: 
+        linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+        url("fondo.jpg") center/cover no-repeat;
+    color: #fff;
+        }
+
+        /* Floating heart particles */
+        .heart {
+            position: absolute;
+            font-size: 2rem;
+            color: rgba(255, 255, 255, 0.7);
+            animation: float 6s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* Main container */
+        .container {
+            text-align: center;
+            z-index: 10;
+            max-width: 90%;
+        }
+
+        .message {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Buttons */
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        button {
+            font-family: inherit;
+            font-size: 1.5rem;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.8);
+            color: #ff6b6b;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        #no-btn {
+            position: relative;
+            transition: transform 0.2s ease;
+        }
+
+        /* Celebration overlay */
+        .celebration {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: rgba(0, 0, 0, 0.7); /* oscuro elegante */
+    backdrop-filter: blur(6px); /* efecto app real */
+    z-index: 1000;
+    text-align: center;
+}
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .celebration-message {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            color: white;
+        }
+.forever-message {
+    font-size: 2.5rem;
+    color: white;
+    text-shadow: 0 0 20px rgba(255,255,255,0.8);
+    text-align: center;
+    margin-top: 2rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 2s ease;
+}
+
+.forever-message.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+        /* Confetti animation */
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #ff6b6b;
+            animation: confettiFall 3s linear infinite;
+        }
+
+        @keyframes confettiFall {
+            0% { transform: translateY(-100vh) rotate(0deg); }
+            100% { transform: translateY(100vh) rotate(360deg); }
+        }
+
+        /* Floating messages */
+        .floating-msg {
+            position: absolute;
+            font-size: 1.2rem;
+            color: #ff6b6b;
+            background: linear-gradient(135deg, #ff4d6d, #ff99ac);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            animation: floatMsg 2s ease-out forwards;
+            pointer-events: none;
+        }
+
+        @keyframes floatMsg {
+            0% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-50px); }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .message { font-size: 2rem; }
+            button { font-size: 1.2rem; padding: 0.8rem 1.5rem; }
+            .buttons { gap: 1rem; }
+        }
+.our-photo {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.our-photo.show {
+    opacity: 1;
+    transform: scale(1);
+}
+
+    </style>
+</head>
+<body>
+    <!-- Floating hearts -->
+    <div id="hearts"></div>
+
+    <!-- Main content -->
+    <div class="container">
+        <div class="message">
+            Dara mi amorcito 💖<br>
+            ¿Quieres ser mi San Valentín este 14 de febrero?
+        </div>
+        <div class="buttons">
+            <button id="yes-btn">Sí 💘</button>
+            <button id="no-btn">No 🙈</button>
+        </div>
+    </div>
+
+    <!-- Celebration overlay -->
+    <div class="celebration" id="celebration">
+    <div class="celebration-message">
+        Sabía que dirías que sí 😍<br>
+        Te amo mucho mi amorcito ! 💕<br>
+        Este 14 de febrero será nuestro 💖
+    </div>
+
+    <div id="confetti"></div>
+
+<img id="our-photo" class="our-photo" src="foto.jpg">
+
+    <div id="forever-message" class="forever-message">
+        Y no solo quiero que seas mi San Valentín... 💕<br><br>
+        Quiero que seas mi amor por siempre bebé ✨💍
+    </div>
+</div>
+
+
+    <!-- Background music (plays on "Sí" click) -->
+    <audio id="romantic-music" loop>
+    <source src="cancion.mp3" type="audio/mp3">
+</audio>
+
+    <script>
+        // Generate floating heart particles
+        const heartsContainer = document.getElementById('hearts');
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.textContent = '💖';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDelay = Math.random() * 6 + 's';
+            heartsContainer.appendChild(heart);
+            setTimeout(() => heart.remove(), 6000);
+        }
+        setInterval(createHeart, 500); // Create a heart every 0.5s
+
+        // Button elements
+        const yesBtn = document.getElementById('yes-btn');
+        const noBtn = document.getElementById('no-btn');
+        const celebration = document.getElementById('celebration');
+        const music = document.getElementById('romantic-music');
+
+        // Messages for "No" attempts
+        const noMessages = [
+            "¿Segura? 🥺",
+            "¿Segura, segura? 🥺",
+            "¿Segura, segura, segura?? 🥺",
+            "Piensa bien hermosa 💕",
+            "Prometo chocolates 🍫",
+            "Prometo pasarla rico 😏💕",
+            "Habrá sorpresas 😏",
+            "Recuerda que te amo demasiado Dara, mi amor bonito 💖"
+        ];
+        let noAttempts = 0;
+
+        // "Sí" button click
+        yesBtn.addEventListener('click', () => {
+            document.getElementById("celebration").style.display = "flex";
+setTimeout(() => {
+    document.getElementById("our-photo").classList.add("show");
+}, 2000);
+            music.play(); const foreverMsg = document.getElementById("forever-message");
+
+setTimeout(() => {
+    foreverMsg.classList.add("show");
+}, 5000); // Play romantic music
+            // Trigger confetti
+            for (let i = 0; i < 200; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.animationDelay = Math.random() * 3 + 's';
+                document.getElementById('confetti').appendChild(confetti);
+                setTimeout(() => confetti.remove(), 3000);
+            }
+        });
+
+        // "No" button hover/click attempt
+        noBtn.addEventListener('mouseenter', () => {
+            // Move button randomly
+            const maxX = window.innerWidth - noBtn.offsetWidth;
+            const maxY = window.innerHeight - noBtn.offsetHeight;
+            noBtn.style.position = 'absolute';
+            noBtn.style.left = Math.random() * maxX + 'px';
+            noBtn.style.top = Math.random() * maxY + 'px';
+
+            // Show floating message
+            if (noAttempts < noMessages.length) {
+                showFloatingMessage(noMessages[noAttempts]);
+                noAttempts++;
+            }
+
+            // After 5 attempts, shrink and change text
+            if (noAttempts >= 5) {
+                noBtn.style.transform = `scale(${Math.max(0.1, 1 - (noAttempts - 4) * 0.2)})`;
+                if (noAttempts >= 10) {
+                    noBtn.textContent = "En realidad quiero decir que SÍ 😳";
+                    noBtn.style.pointerEvents = 'none'; // Prevent further interaction
+                }
+            }
+        });
+
+        // Function to show floating message
+        function showFloatingMessage(text) {
+            const msg = document.createElement('div');
+            msg.className = 'floating-msg';
+            msg.textContent = text;
+            msg.style.left = Math.random() * 80 + 10 + '%';
+            msg.style.top = Math.random() * 80 + 10 + '%';
+            document.body.appendChild(msg);
+            setTimeout(() => msg.remove(), 2000);
+        }
+    </script>
+</body>
+</html>
